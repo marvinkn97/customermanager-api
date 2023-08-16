@@ -23,16 +23,21 @@ public class CustomerDaoJpaImpl implements CustomerDao{
 
     @Override
     public Optional<Customer> getCustomerById(Long customerId) {
-        return Optional.empty();
+        return customerRepository.findById(customerId);
     }
 
     @Override
     public Customer saveCustomer(Customer customer) {
-        return null;
+        return customerRepository.save(customer);
     }
 
     @Override
     public void deleteCustomer(Customer customer) {
+        customerRepository.delete(customer);
+    }
 
+    @Override
+    public boolean existsCustomerWithEmail(String email) {
+        return customerRepository.existsCustomerByEmail(email);
     }
 }

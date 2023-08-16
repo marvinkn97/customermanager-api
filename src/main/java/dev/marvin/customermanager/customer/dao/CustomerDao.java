@@ -10,4 +10,5 @@ public interface CustomerDao {
     Optional<Customer> getCustomerById(Long customerId);
     Customer saveCustomer(Customer customer);
     void deleteCustomer(Customer customer);
+    boolean existsCustomerWithEmail(String email);
 }

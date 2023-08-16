@@ -1,12 +1,11 @@
 package dev.marvin.customermanager.customer.dao;
 
 import dev.marvin.customermanager.customer.entity.Customer;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+
 public class CustomerDaoJdbcImpl implements CustomerDao{
     @Override
     public List<Customer> getAllCustomers() {
@@ -26,5 +25,10 @@ public class CustomerDaoJdbcImpl implements CustomerDao{
     @Override
     public void deleteCustomer(Customer customer) {
 
+    }
+
+    @Override
+    public boolean existsCustomerWithEmail(String email) {
+        return false;
     }
 }

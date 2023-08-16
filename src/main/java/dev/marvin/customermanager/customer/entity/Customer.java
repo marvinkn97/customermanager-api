@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "tbl_customers")
 public class Customer {
     @Id
-    @SequenceGenerator(name = "customer_id_sequence", sequenceName="customer_id_sequence", allocationSize = 1)
+    @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_sequence")
     private Long id;
     @Column(nullable = false)
@@ -14,12 +14,16 @@ public class Customer {
     @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String mobile;
+
     public Customer() {
     }
 
-    public Customer(String name, String email) {
+    public Customer(String name, String email, String mobile) {
         this.name = name;
         this.email = email;
+        this.mobile = mobile;
     }
 
     public Long getId() {
@@ -46,12 +50,16 @@ public class Customer {
         this.email = email;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     @Override
     public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return "Customer{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", mobile='" + mobile + '\'' + '}';
     }
 }
