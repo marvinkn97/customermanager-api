@@ -27,7 +27,7 @@ public class CustomerDaoJpaImpl implements CustomerDao{
     }
 
     @Override
-    public Customer saveCustomer(Customer customer) {
+    public void saveCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 

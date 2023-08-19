@@ -3,7 +3,8 @@ package dev.marvin.customermanager.customer.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tbl_customers")
+@Table(name = "tbl_customers",
+        uniqueConstraints = {@UniqueConstraint(name = "customer_email_unique", columnNames = "email")})
 public class Customer {
     @Id
     @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence", allocationSize = 1)
@@ -28,10 +29,6 @@ public class Customer {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
