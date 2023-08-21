@@ -1,6 +1,6 @@
 package dev.marvin.customermanager.customer.dao;
 
-import dev.marvin.customermanager.customer.entity.Customer;
+import dev.marvin.customermanager.customer.model.Customer;
 import dev.marvin.customermanager.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,8 +27,8 @@ public class CustomerDaoJpaImpl implements CustomerDao{
     }
 
     @Override
-    public void saveCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public void createCustomer(Customer customer) {
+         customerRepository.save(customer);
     }
 
     @Override
@@ -39,5 +39,10 @@ public class CustomerDaoJpaImpl implements CustomerDao{
     @Override
     public boolean existsCustomerWithEmail(String email) {
         return customerRepository.existsCustomerByEmail(email);
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        customerRepository.save(customer);
     }
 }

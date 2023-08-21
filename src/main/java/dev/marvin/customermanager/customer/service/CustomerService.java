@@ -3,7 +3,7 @@ package dev.marvin.customermanager.customer.service;
 import dev.marvin.customermanager.customer.dao.CustomerDao;
 import dev.marvin.customermanager.customer.dto.CustomerRegistrationRequest;
 import dev.marvin.customermanager.customer.dto.CustomerUpdateRequest;
-import dev.marvin.customermanager.customer.entity.Customer;
+import dev.marvin.customermanager.customer.model.Customer;
 import dev.marvin.customermanager.exception.DuplicateResourceException;
 import dev.marvin.customermanager.exception.RequestValidationException;
 import dev.marvin.customermanager.exception.ResourceNotFoundException;
@@ -14,9 +14,11 @@ import java.util.List;
 
 @Service
 public class CustomerService {
+
+    //code to an interface and not concrete implementation
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier(value = "jpa") CustomerDao customerDao) {
+    public CustomerService(@Qualifier(value = "jdbc") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -28,7 +30,7 @@ public class CustomerService {
         return customerDao.getCustomerById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer with id [%s] not found".formatted(customerId)));
     }
 
-    public Customer registerCustomer(CustomerRegistrationRequest request) {
+    public void registerCustomer(CustomerRegistrationRequest request) {
         //check if email is taken
         String email = request.email();
         if (customerDao.existsCustomerWithEmail(email)) {
@@ -36,10 +38,10 @@ public class CustomerService {
         }
 
         //save customer
-        return customerDao.saveCustomer(new Customer(request.name(), email, request.mobile()));
+        customerDao.createCustomer(new Customer(request.name(), email, request.mobile()));
     }
 
-    public Customer updateCustomer(Long customerId, CustomerUpdateRequest request) {
+    public void updateCustomer(Long customerId, CustomerUpdateRequest request) {
         Customer existingCustomer = customerDao.getCustomerById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer with id [%s] not found".formatted(customerId)));
 
         boolean changes = false;
@@ -67,7 +69,7 @@ public class CustomerService {
             throw new RequestValidationException("no data changes");
         }
 
-        return customerDao.saveCustomer(existingCustomer);
+        customerDao.updateCustomer(existingCustomer);
     }
 
     public void deleteCustomer(Long customerId) {

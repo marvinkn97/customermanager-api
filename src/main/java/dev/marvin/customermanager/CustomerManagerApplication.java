@@ -1,6 +1,7 @@
 package dev.marvin.customermanager;
 
-import dev.marvin.customermanager.customer.entity.Customer;
+import com.github.javafaker.Faker;
+import dev.marvin.customermanager.customer.model.Customer;
 import dev.marvin.customermanager.customer.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +18,17 @@ public class CustomerManagerApplication {
 	@Bean
 	public CommandLineRunner runner(CustomerRepository customerRepository){
 		return args -> {
-			Customer customer = new Customer("Marvin", "marvin@gmail.com", "0792000000");
+
+			Faker faker = new Faker();
+
+			var firstName = faker.name().firstName();
+			var lastName = faker.name().lastName();
+			var fullName = firstName + " " + lastName;
+			var email = "%s%s@test.com".formatted(firstName.toLowerCase(), lastName.toLowerCase());
+			var mobile = faker.phoneNumber().cellPhone();
+
+
+			Customer customer = new Customer(fullName, email, mobile);
 			customerRepository.save(customer);
 		};
 	}
