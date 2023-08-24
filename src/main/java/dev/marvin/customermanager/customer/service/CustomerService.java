@@ -18,7 +18,7 @@ public class CustomerService {
     //code to an interface and not concrete implementation
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier(value = "jdbc") CustomerDao customerDao) {
+    public CustomerService(@Qualifier(value = "jpa") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -38,7 +38,7 @@ public class CustomerService {
         }
 
         //save customer
-        customerDao.createCustomer(new Customer(request.name(), email, request.mobile()));
+        customerDao.saveCustomer(new Customer(request.name(), email, request.mobile()));
     }
 
     public void updateCustomer(Long customerId, CustomerUpdateRequest request) {
@@ -69,11 +69,10 @@ public class CustomerService {
             throw new RequestValidationException("no data changes");
         }
 
-        customerDao.updateCustomer(existingCustomer);
+        customerDao.saveCustomer(existingCustomer);
     }
 
-    public void deleteCustomer(Long customerId) {
-        Customer existingCustomer = customerDao.getCustomerById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer with id [%s] not found".formatted(customerId)));
-        customerDao.deleteCustomer(existingCustomer);
+    public void deleteCustomerById(Long customerId) {
+        customerDao.deleteCustomerById(customerId);
     }
 }

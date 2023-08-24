@@ -27,13 +27,13 @@ public class CustomerDaoJpaImpl implements CustomerDao{
     }
 
     @Override
-    public void createCustomer(Customer customer) {
+    public void saveCustomer(Customer customer) {
          customerRepository.save(customer);
     }
 
     @Override
-    public void deleteCustomer(Customer customer) {
-        customerRepository.delete(customer);
+    public void deleteCustomerById(Long customerId) {
+        customerRepository.deleteById(customerId);
     }
 
     @Override
@@ -41,8 +41,4 @@ public class CustomerDaoJpaImpl implements CustomerDao{
         return customerRepository.existsCustomerByEmail(email);
     }
 
-    @Override
-    public void updateCustomer(Customer customer) {
-        customerRepository.save(customer);
-    }
 }
