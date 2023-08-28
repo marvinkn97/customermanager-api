@@ -1,6 +1,6 @@
 package dev.marvin.customermanager.customer.rowmapper;
 
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

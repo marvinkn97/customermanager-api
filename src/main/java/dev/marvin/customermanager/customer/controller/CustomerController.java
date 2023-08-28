@@ -2,7 +2,7 @@ package dev.marvin.customermanager.customer.controller;
 
 import dev.marvin.customermanager.customer.dto.CustomerRegistrationRequest;
 import dev.marvin.customermanager.customer.dto.CustomerUpdateRequest;
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import dev.marvin.customermanager.customer.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package dev.marvin.customermanager.customer.repository;
 
 import dev.marvin.customermanager.AbstractTestContainersTest;
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

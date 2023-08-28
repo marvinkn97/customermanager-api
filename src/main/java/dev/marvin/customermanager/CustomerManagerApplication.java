@@ -1,7 +1,7 @@
 package dev.marvin.customermanager;
 
 import com.github.javafaker.Faker;
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import dev.marvin.customermanager.customer.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

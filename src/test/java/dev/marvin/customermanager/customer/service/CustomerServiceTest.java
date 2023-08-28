@@ -1,7 +1,7 @@
 package dev.marvin.customermanager.customer.service;
 
 import dev.marvin.customermanager.customer.dao.CustomerDao;
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

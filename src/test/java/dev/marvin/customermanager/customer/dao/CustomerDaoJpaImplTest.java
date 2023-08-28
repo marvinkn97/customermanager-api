@@ -1,6 +1,6 @@
 package dev.marvin.customermanager.customer.dao;
 
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import dev.marvin.customermanager.customer.repository.CustomerRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,7 +50,7 @@ class CustomerDaoJpaImplTest {
         //given
         Customer customer = new Customer("Foo Bar", "foo@example.com", "0792000000");
         //when
-        underTest.saveCustomer(customer);
+        underTest.insertCustomer(customer);
         //then
         verify(customerRepository).save(customer);
     }

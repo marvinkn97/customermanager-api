@@ -1,6 +1,6 @@
 package dev.marvin.customermanager.customer.dao;
 
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import dev.marvin.customermanager.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,8 +27,13 @@ public class CustomerDaoJpaImpl implements CustomerDao{
     }
 
     @Override
-    public void saveCustomer(Customer customer) {
-         customerRepository.save(customer);
+    public void insertCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        customerRepository.save(customer);
     }
 
     @Override

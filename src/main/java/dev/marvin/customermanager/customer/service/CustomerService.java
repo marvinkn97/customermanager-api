@@ -3,7 +3,7 @@ package dev.marvin.customermanager.customer.service;
 import dev.marvin.customermanager.customer.dao.CustomerDao;
 import dev.marvin.customermanager.customer.dto.CustomerRegistrationRequest;
 import dev.marvin.customermanager.customer.dto.CustomerUpdateRequest;
-import dev.marvin.customermanager.customer.model.Customer;
+import dev.marvin.customermanager.customer.domain.Customer;
 import dev.marvin.customermanager.exception.DuplicateResourceException;
 import dev.marvin.customermanager.exception.RequestValidationException;
 import dev.marvin.customermanager.exception.ResourceNotFoundException;
@@ -38,7 +38,7 @@ public class CustomerService {
         }
 
         //save customer
-        customerDao.saveCustomer(new Customer(request.name(), email, request.mobile()));
+        customerDao.insertCustomer(new Customer(request.name(), email, request.mobile()));
     }
 
     public void updateCustomer(Long customerId, CustomerUpdateRequest request) {
@@ -69,7 +69,7 @@ public class CustomerService {
             throw new RequestValidationException("no data changes");
         }
 
-        customerDao.saveCustomer(existingCustomer);
+        customerDao.updateCustomer(existingCustomer);
     }
 
     public void deleteCustomerById(Long customerId) {
