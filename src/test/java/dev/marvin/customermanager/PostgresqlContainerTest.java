@@ -6,11 +6,11 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
-public class TestContainersTest extends AbstractTestContainersTest {
+public class PostgresqlContainerTest extends AbstractTestContainersTest {
 
     @Test
     void canStartPostgresDB() {
-        assertThat(postgresContainer.isRunning()).isTrue();
         assertThat(postgresContainer.isCreated()).isTrue();
+        assertThat(postgresContainer.isRunning()).isTrue();
     }
 }

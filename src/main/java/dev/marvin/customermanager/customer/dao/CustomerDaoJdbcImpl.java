@@ -24,15 +24,19 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     public List<Customer> getAllCustomers() {
         String sql = """
                 SELECT id, name, email, mobile
-                FROM
-                tbl_customers
+                FROM tbl_customers
                 """;
         return jdbcTemplate.query(sql, customerRowMapper);
     }
 
     @Override
     public Optional<Customer> getCustomerById(Long customerId) {
-        return Optional.empty();
+        String sql = """
+                SELECT id, name, email, mobile
+                FROM tbl_customers
+                WHERE id = ?
+                """;
+        return jdbcTemplate.query(sql, customerRowMapper, customerId).stream().findFirst();
     }
 
     @Override
@@ -52,11 +56,23 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
 
     @Override
     public void deleteCustomerById(Long customerId) {
-
+        String sql = """
+                DELETE FROM tbl_customers
+                WHERE id = ?
+                """;
+        int rowsAffected = jdbcTemplate.update(sql, customerId);
+        System.out.println("JDBC DELETE result = " + rowsAffected);
     }
 
     @Override
     public boolean existsCustomerWithEmail(String email) {
-        return false;
+
+        String sql = """
+                SELECT COUNT(*)
+                FROM tbl_customers
+                WHERE email = ?
+                """;
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, email);
+        return count != null && count > 0;
     }
 }
