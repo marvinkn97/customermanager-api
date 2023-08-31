@@ -50,14 +50,43 @@ public class CustomerDaoJdbcImpl implements CustomerDao {
     }
 
     @Override
-    public void updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer){
+        if (customer.getName() != null && !customer.getName().isEmpty()) {
+        String sql = """
+                UPDATE tbl_customers
+                SET name = ?
+                WHERE id = ?
+                """;
+            int rowsAffected = jdbcTemplate.update(sql, customer.getName(), customer.getId());
+            System.out.println("JDBC UPDATE customer name result = " + rowsAffected);
+        }
+
+        if (customer.getEmail() != null && !customer.getEmail().isEmpty()) {
+            String sql = """
+                UPDATE tbl_customers
+                SET email = ?
+                WHERE id = ?
+                """;
+            int rowsAffected = jdbcTemplate.update(sql, customer.getEmail(), customer.getId());
+            System.out.println("JDBC UPDATE customer email result = " + rowsAffected);
+        }
+
+        if (customer.getMobile() != null && !customer.getMobile().isEmpty()) {
+            String sql = """
+                UPDATE tbl_customers
+                SET mobile = ?
+                WHERE id = ?
+                """;
+            int rowsAffected = jdbcTemplate.update(sql, customer.getMobile(), customer.getId());
+            System.out.println("JDBC UPDATE customer age result = " + rowsAffected);
+        }
 
     }
 
     @Override
     public void deleteCustomerById(Long customerId) {
         String sql = """
-                DELETE FROM tbl_customers
+                DELETE  FROM tbl_customers
                 WHERE id = ?
                 """;
         int rowsAffected = jdbcTemplate.update(sql, customerId);
